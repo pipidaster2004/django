@@ -7,7 +7,6 @@ class BookForm(forms.ModelForm):
         model = Book
         fields = ['title', 'author', 'published_date', 'price']
 
-        # Опционально: кастомизация полей
         widgets = {
             'published_date': forms.DateInput(attrs={'type': 'date'}),
             'price': forms.NumberInput(attrs={'step': '0.01'}),

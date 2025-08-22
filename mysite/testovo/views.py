@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Book
+from .models import Book, Author
 from .forms import BookForm
+from rest_framework import generics
+from .serializers import BookSerializer, AuthorSerializer
 
 
 def index(request):
@@ -21,3 +23,11 @@ def add_book(request):
 def book_list(request):
     books = Book.objects.all()  # Получаем все книги
     return render(request, 'testovo/book_list.html', {'books': books})
+
+class BookAPIView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class AuthorAPIView(generics.ListAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
